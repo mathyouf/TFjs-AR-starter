@@ -20,14 +20,11 @@
             }
             return img_list
         }
-        let pred_text = document.querySelector("#pred-text")
         let imgs_list = make_images()
         let imagenet_model, prediction
         // Load Mobilenet model from CDN
-        pred_text.innerHTML = "Loading Model"
         mobilenet.load().then(model => {
             imagenet_model = model
-            pred_text.innerHTML = "Classifying"
             for (let i; i < imgs_list.length; i++){
                 let img = imgs_list[i][0]
                 let subtitle = imgs_list[i][1]

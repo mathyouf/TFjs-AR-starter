@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h>Bonsai Images Predicted by Imagenet using TF.js</h>
+    <h1>Bonsai Images Predicted by Imagenet using TF.js</h1>
+    <h3 id="status">Loading Model</h3>
     <div id="images_container"></div>
     <script>
         function make_images(){
@@ -22,6 +23,7 @@
                 img_div.setAttribute("id", "input-img" + i)
                 let img_subtitle = document.createElement("p")
                 img_subtitle.innerText = "Image" + i
+                img_subtitle.classList.add("img_subtitle")
                 img_list.push([img_div, img_subtitle])
                 container.appendChild(img_cont)
                 img_cont.appendChild(img_div)
@@ -29,12 +31,14 @@
             }
             return img_list
         }
+        let status_text = document.querySelector("#status")
         let imgs_list = make_images()
         let imagenet_model, prediction
         // Load Mobilenet model from CDN
         mobilenet.load().then(model => {
             imagenet_model = model
-            for (let i; i < imgs_list.length; i++){
+            for (let i = 1; i < imgs_list.length; i++){
+                status_text.innerText = "Predicting Image " + i
                 let img = imgs_list[i][0]
                 let subtitle = imgs_list[i][1]
                 model.classify(img).then(preds => {

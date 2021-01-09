@@ -6,7 +6,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
 </head>
 <body>
-    <img id="input-img" src="octopus_0032.jpg"/>
+    <img id="input-img" src="octopus_0032.jpg" crossorigin="anonymous"/>
     <p id="pred-text">Rendering the page</p>
     <script>
         let pred_text = document.querySelector("#pred-text")
@@ -16,10 +16,7 @@
         mobilenet.load().then(model => {
             pred_text.innerHTML = "Classifying"
             model.classify(input_img).then(preds => {
-                let keys = Object.keys(preds)
-                for (i, key in enumerate(keys)){
-                    console.log("Key" + i + ": " + key)
-                }
+                console.log(preds)
                 console.log("Predictions: ")
                 pred_text.innerText = preds[0].classname
             })

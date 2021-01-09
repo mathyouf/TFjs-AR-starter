@@ -7,13 +7,17 @@
 </head>
 <body>
     <img id="input-img" src="octopus_0001.jpg"/>
-    <p id="pred-text">Predicting...</p>
+    <p id="pred-text">Rendering the page</p>
     <script>
         let pred_text = document.querySelector("#pred-text")
         let input_img = document.querySelector("#input-img")
         // Load Mobilenet model from CDN
+        pred_text.innerHTML = "Loading Model"
         mobilenet.load().then(model => {
+            pred_text.innerHTML = "Classifying"
+            console.log("Model: " + model)
             model.classify(input_img).then(preds => {
+            console.log("Predictions: " + preds)
             pred_text.innerText = preds[0].classname
             })
         })

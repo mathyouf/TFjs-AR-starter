@@ -4,7 +4,7 @@
     <title>TFjs-AR-starter</title>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <h1>Bonsai Images Predicted by Imagenet using TF.js</h1>
@@ -46,6 +46,7 @@
                     subtitle.innerText = preds[0].className + preds[1].className + preds[2].className
                 })
             }
+            status_text.innerText = "Finished Predictions"
         })
     </script>
 </body>

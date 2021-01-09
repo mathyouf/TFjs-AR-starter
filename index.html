@@ -12,7 +12,8 @@
         function make_images(){
             let img_list = []
             let container = document.querySelector("#images_container")
-            for (let i; i < 9; i++){
+            for (let i=0; i < 9; i++){
+                console.log(i)
                 let img_cont = document.createElement("div")
                 let img_div = document.createElement("img")
                 img_div.setAttribute("src", "bonsai/image_000" + i + ".jpg")

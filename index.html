@@ -13,10 +13,11 @@
         let input_img = document.querySelector("#input-img")
         // Load Mobilenet model from CDN
         pred_text.innerHTML = "Loading Model"
-        mobilenet.load().then(model => {
+        mobilenet.load().then(json_model => {
             pred_text.innerHTML = "Classifying"
-            console.log("Model: " + model)
-            model.classify(input_img).then(preds => {
+            console.log("Model: " + JSON.parse(json_model))
+            json_model.classify(input_img).then(json_preds => {
+            let preds = JSON.parse(json_preds)
             console.log("Predictions: " + preds)
             pred_text.innerText = preds[0].classname
             })

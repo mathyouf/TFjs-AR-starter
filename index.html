@@ -6,19 +6,21 @@
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
 </head>
 <body>
-    <img id="input-img" src="octopus_0032.jpg" crossorigin="anonymous"/>
+    <img id="input-img" src="bonsai/image_0001.jpg" crossorigin="anonymous"/>
     <p id="pred-text">Rendering the page</p>
     <script>
         let pred_text = document.querySelector("#pred-text")
         let input_img = document.querySelector("#input-img")
+        let imagenet_model, prediction
         // Load Mobilenet model from CDN
         pred_text.innerHTML = "Loading Model"
         mobilenet.load().then(model => {
+            imagenet_model = model
             pred_text.innerHTML = "Classifying"
             model.classify(input_img).then(preds => {
-                console.log(preds)
+                prediction = preds
                 console.log("Predictions: ")
-                pred_text.innerText = preds[0].classname
+                pred_text.innerText = preds[0].className
             })
         })
     </script>

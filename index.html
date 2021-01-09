@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TFjs-AR-starter</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
+</head>
+<body>
+    <img id="input-img" src="octopus_0001.jpg"/>
+    <p id="pred-text">Predicting...</p>
+    <script>
+        let pred_text = document.querySelector("#pred-text")
+        let input_img = document.querySelector("#input-img")
+        // Load Mobilenet model from CDN
+        mobilenet.load().then(model => {
+            model.classify(input_img).then(preds => {
+            pred_text.innerText = preds[0].classname
+            })
+        })
+    </script>
+</body>
+</html>

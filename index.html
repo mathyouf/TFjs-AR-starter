@@ -4,6 +4,7 @@
     <title>TFjs-AR-starter</title>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h>Bonsai Images Predicted by Imagenet using TF.js</h>
@@ -12,7 +13,7 @@
         function make_images(){
             let img_list = []
             let container = document.querySelector("#images_container")
-            for (let i=0; i < 9; i++){
+            for (let i=1; i < 9; i++){
                 console.log(i)
                 let img_cont = document.createElement("div")
                 let img_div = document.createElement("img")

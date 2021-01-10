@@ -3,7 +3,6 @@
 <head>
     <title>TFjs-AR-starter</title>
     <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -19,7 +18,7 @@
                 let img_cont = document.createElement("div")
                 img_cont.classList.add("img_div")
                 let img_div = document.createElement("img")
-                img_div.setAttribute("src", "bonsai/image_000" + i + ".jpg")
+                img_div.setAttribute("src", "Leopards/image_000" + i + ".jpg")
                 img_div.setAttribute("id", "input-img" + i)
                 let img_subtitle = document.createElement("p")
                 img_subtitle.innerText = "Image" + i
@@ -31,11 +30,12 @@
             }
             return img_list
         }
+        let model_path = "web_model/model.json"
         let status_text = document.querySelector("#status")
         let imgs_list = make_images()
         let imagenet_model, prediction
         // Load Mobilenet model from CDN
-        mobilenet.load().then(model => {
+        catdog_model = tf.loadLayersModel(model_path).then(model => {
             imagenet_model = model
             for (let i = 0; i < imgs_list.length; i++){
                 status_text.innerText = "Predicting Image " + i

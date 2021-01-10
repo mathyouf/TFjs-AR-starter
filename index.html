@@ -32,7 +32,9 @@
 
         function convert_img_to_tensor(img){
             let tensor = tf.browser.fromPixels(img)
-            let tensor_reshaped = tensor
+            let img_tensor_reshaped = img_tensor.resizeBilinear([224,224])
+            let img_tensor_reshaped_expanded = img_tensor_reshaped.expandDims(0)
+            return img_tensor_reshaped_expanded
         }
 
         let model_path = "web_model/model.json"
@@ -46,9 +48,7 @@
                 status_text.innerText = "Predicting Image " + i
                 let subtitle = imgs_list[i][1]
                 let img_tensor = convert_img_to_tensor(imgs_list[i][0])
-                let img_tensor_reshaped = img_tensor.resizeBilinear([224,224])
-                let img_tensor_reshaped_expanded = img_tensor_reshaped.expandDims(0)
-                model.predict(img_tensor_reshaped_expanded).then(preds => {
+                model.predict(img_tensor).then(preds => {
                     prediction = preds
                     subtitle.innerText = preds[0].className + preds[1].className + preds[2].className
                 })

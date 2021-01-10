@@ -40,7 +40,7 @@
         let model_path = "web_model/model.json"
         let status_text = document.querySelector("#status")
         let imgs_list = make_images()
-        let imagenet_model, prediction
+        let catdog_model, prediction
         // Load Mobilenet model from CDN
         m = tf.loadLayersModel(model_path).then(model => {
             catdog_model = model
@@ -48,10 +48,13 @@
                 status_text.innerText = "Predicting Image " + i
                 let subtitle = imgs_list[i][1]
                 let img_tensor = convert_img_to_tensor(imgs_list[i][0])
-                model.predict(img_tensor).then(preds => {
-                    prediction = preds
-                    subtitle.innerText = preds[0].className + preds[1].className + preds[2].className
-                })
+                // Returns Tensor
+                let pred = model.predictOnBatch(img_tensor)
+                // We have to extract them
+                let pred_extract = pred.dataSync()
+                let cat_percent = (pred_extract[0]*100).toPrecision(2).toString()
+                let dog_percent = (pred_extract[1]*100).toPrecision(2).toString()
+                subtitle.innerText = "Cat: " + cat_percent + " - Dog: " + dog_percent
             }
             status_text.innerText = "Finished Predictions"
         })

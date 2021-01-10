@@ -14,7 +14,6 @@
             let img_list = []
             let container = document.querySelector("#images_container")
             for (let i=1; i < 9; i++){
-                console.log(i)
                 let img_cont = document.createElement("div")
                 img_cont.classList.add("img_div")
                 let img_div = document.createElement("img")
@@ -41,7 +40,7 @@
                 status_text.innerText = "Predicting Image " + i
                 let img = imgs_list[i][0]
                 let subtitle = imgs_list[i][1]
-                model.classify(img).then(preds => {
+                model.predict(img).then(preds => {
                     prediction = preds
                     subtitle.innerText = preds[0].className + preds[1].className + preds[2].className
                 })

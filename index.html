@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>TFjs-AR-starter</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.4.0/dist/tf.min.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -34,12 +34,13 @@
         let imgs_list = make_images()
         let imagenet_model, prediction
         // Load Mobilenet model from CDN
-        catdog_model = tf.loadLayersModel(model_path).then(model => {
-            imagenet_model = model
+        m = tf.loadLayersModel(model_path).then(model => {
+            catdog_model = model
             for (let i = 0; i < imgs_list.length; i++){
                 status_text.innerText = "Predicting Image " + i
                 let img = imgs_list[i][0]
                 let subtitle = imgs_list[i][1]
+                let resized_img = tf.image.resize(img, [224,224])
                 model.predict(img).then(preds => {
                     prediction = preds
                     subtitle.innerText = preds[0].className + preds[1].className + preds[2].className

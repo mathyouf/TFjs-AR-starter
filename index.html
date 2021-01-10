@@ -31,7 +31,7 @@
         }
 
         function convert_img_to_tensor(img){
-            let tensor = tf.browser.fromPixels(img)
+            let img_tensor = tf.browser.fromPixels(img)
             let img_tensor_reshaped = img_tensor.resizeBilinear([224,224])
             let img_tensor_reshaped_expanded = img_tensor_reshaped.expandDims(0)
             return img_tensor_reshaped_expanded

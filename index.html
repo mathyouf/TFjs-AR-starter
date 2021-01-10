@@ -37,7 +37,7 @@
         // Load Mobilenet model from CDN
         mobilenet.load().then(model => {
             imagenet_model = model
-            for (let i = 1; i < imgs_list.length; i++){
+            for (let i = 0; i < imgs_list.length; i++){
                 status_text.innerText = "Predicting Image " + i
                 let img = imgs_list[i][0]
                 let subtitle = imgs_list[i][1]
